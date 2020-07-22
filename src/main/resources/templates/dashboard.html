@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Dashboard Template · Bootstrap</title>
+    
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+    
+     <script src="../js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" integrity="sha384-EbSscX4STvYAC/DxHse8z5gEDaNiKAIGW+EpfzYTfQrgIlHywXXrM9SUIZ0BlyfF" crossorigin="anonymous"></script>
+     <script src="../js/c.js"></script>
+     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet"> 
+  </head>
+  <body>
+    
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <span data-feather="home"></span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file"></span>
+              Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
+              Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="layers"></span>
+              Integrations
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Social engagement
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Year-end sale
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+
+	  <div th:insert="market_graph.html"></div>
+
+
+      <h2>Section title</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm" id='trades'>
+          <thead>
+            <tr>
+	      <th></th>
+              <th>Time</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Side</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+    <!--  Realtime graph code -->
+	<script>
+		var trace1 = {
+			type: "scatter",
+			mode: "lines",
+			name: 'Bid',
+			x: [],
+			y: [],
+			line: {color: '#17BECF'}
+		};
+
+		var trace2 = {
+			type: "scatter",
+			mode: "lines",
+			name: 'Ask',
+			x: [],
+			y: [],
+			line: {color: '#7F7F7F'}
+		};
+
+		var data = [trace1,trace2];
+
+		var layout = {
+		  title: 'Basic Time Series',
+		};
+
+		Plotly.newPlot('chart', data, layout);
+
+		
+		var updateMarketData = function(data) {
+			console.log("[UPDATE] " + data);		
+
+			let time = data.map(function(x) {return x.time;});
+			let bid = data.map(function(x) {return x.bid;});
+			let ask  = data.map(function(x) {return x.ask;});
+
+			trace1.x.push.apply(trace1.x,time );
+			trace2.x.push.apply(trace2.x, time);
+
+			trace1.y.push.apply(trace1.y, bid);
+			trace2.y.push.apply(trace2.y, ask);
+
+			Plotly.update('chart', data, layout);
+
+		};
+
+		var updateTradeData = function(data) {
+			console.log('[TRADE]');
+			let tradeTable = $('#trades').DataTable();
+			tradeTable.rows.add(data).draw().nodes().to$().animate({color:'black'});
+
+		};
+
+		var dispatch = function(data) {
+			if (data.hasOwnProperty("m")) {		// market data update
+				updateMarketData(data['m']);
+			}
+			else if (data.hasOwnProperty("t")) { 	//  trade data update
+				updateTradeData(data['t']);
+			}
+		};
+
+	</script>
+
+	<script>
+	if ("WebSocket" in window) {
+		var l = window.location;
+		var socket = new WebSocket("ws://127.0.0.1:5000");
+		socket.binaryType = 'arraybuffer';
+
+		socket.addEventListener('open', (event) => {
+			console.log("connected:" + event);
+		});
+
+		socket.addEventListener('close', (event) => {
+			console.log("connection closed:" + event);
+		});
+
+		socket.addEventListener('message', (msg) => {
+			console.log("Received data:" + msg.data);
+			var data = deserialize(msg.data);
+			dispatch(data);
+		});
+
+	
+		socket.addEventListener('error', (event) => {
+			console.log("connection error:" + event);
+		});
+
+		console.log("connecting...");
+  	} 
+
+	</script>
+
+    <!--  Trade table update -->
+	<script>
+		$(document).ready(function() {
+			var tradeTable = $('#trades').DataTable({
+				columns:[
+					{
+						className: 'details-control',
+						orderable: false,
+						data: null,
+						defaultContent: ''
+					},
+					{data:"time"},
+					{
+						data:"price",
+						render: function(data, type, row) {
+							return 
+						}
+						
+					},
+					{data:"qty"},
+					{data:"side"}
+				],
+				order: [[1, 'desc']],
+				deferRender: true,
+				columnDefs:[{
+					targets: 4,
+					createdCell: function(cell,cellData,rowData,rowIndex,colIndex) {
+					if (cellData==="Buy") {
+						$(cell).css('color','red');
+					} else {
+						$(cell).css('color','blue');
+					}
+				}
+				}] 
+			});
+		});
+	</script>
+	
+	<script type="text/javascript">
+	var app = new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello Vue!'
+		  }
+		})
+	</script>
+  </body>
+</html>
