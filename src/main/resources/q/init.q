@@ -31,7 +31,7 @@ clients: ([] handle:(); connectedSince: ());
 .z.wc:{ delete from `clients where handle=x; };
 
 / Client Publish 
-pub: { h:(0!clients)[x]; (neg h[`handle]) -8! (enlist `m)!enlist gen_data[10;`EURUSD]; (neg h[`handle]) -8! (enlist `t)!enlist gen_trades[10] };
+pub: { h:(0!clients)[x]; (neg h[`handle]) -8! (enlist `m)!enlist gen_data[4;`EURUSD]; (neg h[`handle]) -8! (enlist `t)!enlist gen_trades[10] };
 / Timer callback
 .z.ts:{pub each til count clients;};
 

@@ -34,7 +34,7 @@
     
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
   </head>
   <body>
@@ -179,6 +179,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 
+    <!--  Realtime graph code -->
 	<script>
 		var trace1 = {
 			type: "scatter",
@@ -206,7 +207,7 @@
 
 		Plotly.newPlot('chart', data, layout);
 
-
+		
 		var updateMarketData = function(data) {
 			console.log("[UPDATE] " + data);		
 
@@ -272,6 +273,7 @@
 
 	</script>
 
+    <!--  Trade table update -->
 	<script>
 		$(document).ready(function() {
 			var tradeTable = $('#trades').DataTable({
@@ -282,10 +284,16 @@
 						data: null,
 						defaultContent: ''
 					},
-					{"data":"time"},
-					{"data":"price"},
-					{"data":"qty"},
-					{"data":"side"}
+					{data:"time"},
+					{
+						data:"price",
+						render: function(data, type, row) {
+							return 
+						}
+						
+					},
+					{data:"qty"},
+					{data:"side"}
 				],
 				order: [[1, 'desc']],
 				deferRender: true,
@@ -297,11 +305,19 @@
 					} else {
 						$(cell).css('color','blue');
 					}
-				
 				}
-				}] // columnDefs
+				}] 
 			});
 		});
+	</script>
+	
+	<script type="text/javascript">
+	var app = new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello Vue!'
+		  }
+		})
 	</script>
   </body>
 </html>
